@@ -127,6 +127,7 @@ class Friends extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    // Gitコミットテスト start
                     for (int i = 0; i < 3; i++)
                       const Padding(
                         padding: EdgeInsets.all(4.0),
@@ -144,6 +145,7 @@ class Friends extends ConsumerWidget {
                           ),
                         ),
                       ),
+                    // Gitコミットテスト end
                   ],
                 ),
               ),
