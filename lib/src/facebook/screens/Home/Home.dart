@@ -51,6 +51,26 @@ class HomeState extends State<Home> {
                     color: Colors.black,
                     splashRadius: 21,
                     onPressed: () {
+                      // ダイアログの表示
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            // title: const Text("タイトル"),
+                            content: const Text("ボタンをタップしました"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: const Text("OK"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
@@ -70,6 +90,26 @@ class HomeState extends State<Home> {
                     color: Colors.black,
                     splashRadius: 21,
                     onPressed: () {
+                      // ダイアログの表示
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            // title: const Text("タイトル"),
+                            content: const Text("ボタンをタップしました"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: const Text("OK"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
@@ -89,6 +129,26 @@ class HomeState extends State<Home> {
                     color: Colors.black,
                     splashRadius: 21,
                     onPressed: () {
+                      // ダイアログの表示
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            // title: const Text("タイトル"),
+                            content: const Text("ボタンをタップしました"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: const Text("OK"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
@@ -99,81 +159,73 @@ class HomeState extends State<Home> {
             delegate: SliverChildListDelegate([
               Container(
                 color: Colors.white,
+                width: double.infinity,
                 child: Column(
                   children: [
                     /// 1
-                    Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey,
-                            width: 5,
-                          )
-                        )
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          // 要素を左右に配置
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            /// ユーザー写真
-                            Container(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 10.0, bottom: 6.0, right: 10.0),
+                      child: Row(
+                        // 要素を左右に配置
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          /// ユーザー写真
+                          Container(
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: Image.asset('images/アザラシ.jpg').image,
-                                )
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: Image.asset('images/アザラシ.jpg').image,
+                                  )
                               )
-                            ),
-                            /// 投稿テキストフィールド
-                            const Expanded(
-                              child: TextField(
-                                style: TextStyle(
+                          ),
+                          /// 投稿テキストフィールド
+                          const Expanded(
+                            child: TextField(
+                              style: TextStyle(
                                 color: Colors.black,
-                                ),
-                                enabled: true,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'その気持ち、シェアしよう',
-                                  hintStyle: TextStyle(
-                                    color: Colors.black,
-                                  ),
+                              ),
+                              enabled: true,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'その気持ち、シェアしよう',
+                                hintStyle: TextStyle(
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Icon(
-                                    Icons.add_photo_alternate,
-                                    size: 30,
-                                    color: Colors.lightGreen,
-                                  ),
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // TODO:新規投稿アイコンタップ時の挙動
+                              Padding(
+                                padding: EdgeInsets.all(5),
+                                child: Icon(
+                                  Icons.add_photo_alternate,
+                                  size: 30,
+                                  color: Colors.lightGreen,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey,
-                                width: 5,
-                              )
-                          )
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: SingleChildScrollView(
+
+                    /// 区切り線
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 5,
+                      // indent: 20,
+                      // endIndent: 20,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                      child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
@@ -189,7 +241,7 @@ class HomeState extends State<Home> {
                                         height: 130,
                                         decoration: BoxDecoration(
                                             borderRadius: const BorderRadius.vertical(
-                                                top: Radius.circular(20),
+                                              top: Radius.circular(20),
                                             ),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
@@ -217,11 +269,11 @@ class HomeState extends State<Home> {
                                       width: 100,
                                       height: 180,
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: Image.asset('images/river.jpg').image,
-                                        )
+                                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: Image.asset('images/river.jpg').image,
+                                          )
                                       ),
                                       /// TODO: 共通化
                                       alignment: Alignment.topLeft,
@@ -241,15 +293,15 @@ class HomeState extends State<Home> {
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(1.0),
                                                   child: Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image: Image.asset('images/ペンギン.jpg').image,
+                                                      width: 30,
+                                                      height: 30,
+                                                      decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          image: DecorationImage(
+                                                            fit: BoxFit.fill,
+                                                            image: Image.asset('images/ペンギン.jpg').image,
+                                                          )
                                                       )
-                                                    )
                                                   ),
                                                 ),
                                               ),
@@ -257,10 +309,10 @@ class HomeState extends State<Home> {
                                             const Padding(
                                               // padding: EdgeInsets.all(8.0),
                                               padding: EdgeInsets.only(
-                                                top: 0,
-                                                right: 8.0,
-                                                left: 8.0,
-                                                bottom: 15
+                                                  top: 0,
+                                                  right: 8.0,
+                                                  left: 8.0,
+                                                  bottom: 15
                                               ),
                                               child: Text(
                                                 'username',
@@ -285,11 +337,11 @@ class HomeState extends State<Home> {
                                       width: 100,
                                       height: 180,
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: Image.asset('images/cherry_blossoms.jpg').image,
-                                        )
+                                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: Image.asset('images/cherry_blossoms.jpg').image,
+                                          )
                                       ),
                                       /// TODO: 共通化
                                       alignment: Alignment.topLeft,
@@ -309,15 +361,15 @@ class HomeState extends State<Home> {
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(1.0),
                                                   child: Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image: Image.asset('images/ししまい.png').image,
+                                                      width: 30,
+                                                      height: 30,
+                                                      decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          image: DecorationImage(
+                                                            fit: BoxFit.fill,
+                                                            image: Image.asset('images/ししまい.png').image,
+                                                          )
                                                       )
-                                                    )
                                                   ),
                                                 ),
                                               ),
@@ -325,10 +377,10 @@ class HomeState extends State<Home> {
                                             const Padding(
                                               // padding: EdgeInsets.all(8.0),
                                               padding: EdgeInsets.only(
-                                                top: 0,
-                                                right: 8.0,
-                                                left: 8.0,
-                                                bottom: 15
+                                                  top: 0,
+                                                  right: 8.0,
+                                                  left: 8.0,
+                                                  bottom: 15
                                               ),
                                               child: Text(
                                                 'username',
@@ -353,11 +405,11 @@ class HomeState extends State<Home> {
                                       width: 100,
                                       height: 180,
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: Image.asset('images/shrine.jpg').image,
-                                        )
+                                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: Image.asset('images/shrine.jpg').image,
+                                          )
                                       ),
                                       /// TODO: 共通化
                                       alignment: Alignment.topLeft,
@@ -377,15 +429,15 @@ class HomeState extends State<Home> {
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(1.0),
                                                   child: Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image: Image.asset('images/はにわ.jpg').image,
+                                                      width: 30,
+                                                      height: 30,
+                                                      decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          image: DecorationImage(
+                                                            fit: BoxFit.fill,
+                                                            image: Image.asset('images/はにわ.jpg').image,
+                                                          )
                                                       )
-                                                    )
                                                   ),
                                                 ),
                                               ),
@@ -393,10 +445,10 @@ class HomeState extends State<Home> {
                                             const Padding(
                                               // padding: EdgeInsets.all(8.0),
                                               padding: EdgeInsets.only(
-                                                top: 0,
-                                                right: 8.0,
-                                                left: 8.0,
-                                                bottom: 15
+                                                  top: 0,
+                                                  right: 8.0,
+                                                  left: 8.0,
+                                                  bottom: 15
                                               ),
                                               child: Text(
                                                 'username',
@@ -415,176 +467,184 @@ class HomeState extends State<Home> {
                               ),
                             ],
                           )
-                        )
                       )
                     ),
+
+                    /// 区切り線
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 5,
+                      // indent: 20,
+                      // endIndent: 20,
+                    ),
+                    
                     /// 3
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                color: Colors.grey,
-                                width: 5,
-                              )
-                          )
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                /// ユーザー写真
-                                Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: Image.asset('images/馬.jpg').image,
-                                        )
-                                    )
-                                ),
-                                const Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'username',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                                fontSize: 20.0,
-                                          ),
-                                        ),
-                                        Text(
-                                          '〇月〇日 23:59:59',
-                                          style: TextStyle(
-                                            fontSize: 8.0,
-                                            color: Colors.grey
-                                          )
-                                        ),
-                                      ]
-                                    ),
-                                  ),
-                                ),
-                                const Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: SizedBox(
-                                        width: 30,
-                                        child: Icon(
-                                          Icons.more_horiz,
-                                          size: 30,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: SizedBox(
-                                        width: 30,
-                                        child: Icon(
-                                          Icons.close,
-                                          size: 30,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                /// ユーザー写真
-                                // Icon(
-                                //   Icons.account_circle,
-                                //   size: 40,
-                                //   color: Colors.indigo,
-                                // ),
-                                // /// ユーザー名と投稿日付
-                                // Column(
-                                //   children: [
-                                //     Text('username'),
-                                //     Text('date'),
-                                //   ],
-                                // ),
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.end,
-                                //   children: [
-                                //     /// アイコン
-                                //     Padding(
-                                //       padding: EdgeInsets.all(5),
-                                //       child: Icon(
-                                //         Icons.more_horiz,
-                                //         size: 30,
-                                //         color: Colors.black,
-                                //       ),
-                                //     ),
-                                //     Padding(
-                                //       padding: EdgeInsets.all(5),
-                                //       child: Icon(
-                                //         Icons.close,
-                                //         size: 30,
-                                //         color: Colors.black,
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(10),
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: 60,
-                              child: Text('投稿内容テキスト投稿内容テキスト投稿内容テキスト投稿内容テキスト'),
-                            )
-                          ),
-                          Image.asset('images/temple.jpg'),
-                          // Icon(
-                          //   Icons.home,
-                          //   size: 350,
-                          // ),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                  child: ListTile(
-                                    title: Text(
-                                        'いいね！',
-                                        style: TextStyle(fontSize: 10)
-                                    ),
-                                    leading: Icon(Icons.thumb_up),
-                                    minLeadingWidth: 10.0,
+                              /// ユーザー写真
+                              Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: Image.asset('images/馬.jpg').image,
+                                      )
+                                  )
+                              ),
+                              const Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'username',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                              fontSize: 20.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        '〇月〇日 23:59:59',
+                                        style: TextStyle(
+                                          fontSize: 8.0,
+                                          color: Colors.grey
+                                        )
+                                      ),
+                                    ]
                                   ),
+                                ),
                               ),
-                              Expanded(
-                                  child: ListTile(
-                                    title: Text(
-                                      'コメントする',
-                                      style: TextStyle(fontSize: 10)
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  // TODO:…アイコンタップ時の挙動
+                                  Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: SizedBox(
+                                      width: 30,
+                                      child: Icon(
+                                        Icons.more_horiz,
+                                        size: 30,
+                                        color: Colors.black,
+                                      ),
                                     ),
-                                    leading: Icon(Icons.chat_bubble),
-                                    minLeadingWidth: 10.0,
-                                  )
+                                  ),
+                                  // TODO:✕アイコンタップ時の挙動
+                                  Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: SizedBox(
+                                      width: 30,
+                                      child: Icon(
+                                        Icons.close,
+                                        size: 30,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                  child: ListTile(
-                                    title: Text('シェア', style: TextStyle(fontSize: 13)),
-                                    leading: Icon(Icons.share),
-                                    minLeadingWidth: 10.0,
-                                  )
-                              ),
+                              /// ユーザー写真
+                              // Icon(
+                              //   Icons.account_circle,
+                              //   size: 40,
+                              //   color: Colors.indigo,
+                              // ),
+                              // /// ユーザー名と投稿日付
+                              // Column(
+                              //   children: [
+                              //     Text('username'),
+                              //     Text('date'),
+                              //   ],
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   children: [
+                              //     /// アイコン
+                              //     Padding(
+                              //       padding: EdgeInsets.all(5),
+                              //       child: Icon(
+                              //         Icons.more_horiz,
+                              //         size: 30,
+                              //         color: Colors.black,
+                              //       ),
+                              //     ),
+                              //     Padding(
+                              //       padding: EdgeInsets.all(5),
+                              //       child: Icon(
+                              //         Icons.close,
+                              //         size: 30,
+                              //         color: Colors.black,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 60,
+                            child: Text('投稿内容テキスト投稿内容テキスト投稿内容テキスト投稿内容テキスト'),
+                          )
+                        ),
+                        Image.asset('images/temple.jpg'),
+                        // Icon(
+                        //   Icons.home,
+                        //   size: 350,
+                        // ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                child: ListTile(
+                                  title: Text(
+                                      'いいね！',
+                                      style: TextStyle(fontSize: 10)
+                                  ),
+                                  leading: Icon(Icons.thumb_up),
+                                  minLeadingWidth: 10.0,
+                                ),
+                            ),
+                            Expanded(
+                                child: ListTile(
+                                  title: Text(
+                                    'コメントする',
+                                    style: TextStyle(fontSize: 10)
+                                  ),
+                                  leading: Icon(Icons.chat_bubble),
+                                  minLeadingWidth: 10.0,
+                                )
+                            ),
+                            Expanded(
+                                child: ListTile(
+                                  title: Text('シェア', style: TextStyle(fontSize: 13)),
+                                  leading: Icon(Icons.share),
+                                  minLeadingWidth: 10.0,
+                                )
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
+
+                    /// 区切り線
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 5,
+                      // indent: 20,
+                      // endIndent: 20,
+                    ),
+
                     /// 4
                     Container(
                       decoration: const BoxDecoration(
@@ -612,7 +672,7 @@ class HomeState extends State<Home> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    /// アイコン
+                                    // TODO: …アイコンタップ時の挙動
                                     Padding(
                                       padding: EdgeInsets.all(5),
                                       child: Icon(
@@ -621,6 +681,7 @@ class HomeState extends State<Home> {
                                         color: Colors.black,
                                       ),
                                     ),
+                                    // TODO: ✕アイコンタップ時の挙動
                                     Padding(
                                       padding: EdgeInsets.all(5),
                                       child: Icon(
@@ -640,7 +701,8 @@ class HomeState extends State<Home> {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                // for (int i = 0; i < 4; i++)
+                                for (int i = 0; i < 4; i++)
+                                // 各ユーザー
                                 Card(
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                   child: SizedBox(
@@ -685,9 +747,30 @@ class HomeState extends State<Home> {
                                                   onPrimary: Colors.white,
                                                 ),
                                                 onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                                  // 画面遷移
+                                                  // Navigator.push(
+                                                  //   context,
+                                                  //   MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                                  // );
+                                                  // ダイアログの表示
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        // title: const Text("タイトル"),
+                                                        content: const Text("ボタンをタップしました"),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text("Cancel"),
+                                                            onPressed: () => Navigator.pop(context),
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text("OK"),
+                                                            onPressed: () => Navigator.pop(context),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
                                                   );
                                                 },
                                                 icon: const Icon(Icons.person_add),
@@ -702,234 +785,30 @@ class HomeState extends State<Home> {
                                                   foregroundColor: Colors.black,
                                                 ),
                                                 onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                child: const Text('削除する'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                  child: SizedBox(
-                                    width: 250,
-                                    height: 370,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width:250,
-                                          height: 250,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.vertical(
-                                                top: Radius.circular(20),
-                                              ),
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset('images/しか.jpg').image,
-                                              )
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          height: 60,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'username',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              )
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton.icon(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.indigo,
-                                                  onPrimary: Colors.white,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                icon: const Icon(Icons.person_add),
-                                                label: const Text('友達を追加'),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.grey[200],
-                                                  foregroundColor: Colors.black,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                child: const Text('削除する'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                  child: SizedBox(
-                                    width: 250,
-                                    height: 370,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width:250,
-                                          height: 250,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.vertical(
-                                                top: Radius.circular(20),
-                                              ),
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset('images/かぶとむし.jpg').image,
-                                              )
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          height: 60,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'username',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              )
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton.icon(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.indigo,
-                                                  onPrimary: Colors.white,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                icon: const Icon(Icons.person_add),
-                                                label: const Text('友達を追加'),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.grey[200],
-                                                  foregroundColor: Colors.black,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                child: const Text('削除する'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                  child: SizedBox(
-                                    width: 250,
-                                    height: 370,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width:250,
-                                          height: 250,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.vertical(
-                                                top: Radius.circular(20),
-                                              ),
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset('images/きりん.jpg').image,
-                                              )
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          height: 60,
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'username',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                              )
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton.icon(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.indigo,
-                                                  onPrimary: Colors.white,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                                                  );
-                                                },
-                                                icon: const Icon(Icons.person_add),
-                                                label: const Text('友達を追加'),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.grey[200],
-                                                  foregroundColor: Colors.black,
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                                  // 画面遷移
+                                                  // Navigator.push(
+                                                  //   context,
+                                                  //   MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                                  // );
+                                                  // ダイアログの表示
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        // title: const Text("タイトル"),
+                                                        content: const Text("ボタンをタップしました"),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text("Cancel"),
+                                                            onPressed: () => Navigator.pop(context),
+                                                          ),
+                                                          TextButton(
+                                                            child: const Text("OK"),
+                                                            onPressed: () => Navigator.pop(context),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
                                                   );
                                                 },
                                                 child: const Text('削除する'),
@@ -950,24 +829,44 @@ class HomeState extends State<Home> {
                               'すべて見る',
                               textAlign: TextAlign.center,
                             ),
-                            // onTap: () {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(builder: (context) => const Login(title: '',)),
-                            //   );
-                            // },
                             onTap: () async {
-                              final document = await FirebaseFirestore.instance
-                                  .collection('tests')
-                                  .doc('rvCw12kqWXOwTuMKlV1n')
-                                  .get();
-                              setState(() {
-                                orderDocumentInfo =
-                                '${document['username']}';
-                              });
+                              // 画面遷移
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                              // );
+                              // firestoreから値を取得
+                              // final document = await FirebaseFirestore.instance
+                              //     .collection('tests')
+                              //     .doc('rvCw12kqWXOwTuMKlV1n')
+                              //     .get();
+                              // setState(() {
+                              //   orderDocumentInfo =
+                              //   '${document['username']}';
+                              // });
+                              // ダイアログの表示
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    // title: const Text("タイトル"),
+                                    content: const Text("ボタンをタップしました"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text("Cancel"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                      TextButton(
+                                        child: const Text("OK"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             }
                           ),
-                          ListTile(title: Text(orderDocumentInfo)),
+                          // ListTile(title: Text(orderDocumentInfo)),
                         ],
                       ),
                     ),

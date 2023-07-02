@@ -32,26 +32,26 @@ class OutLineState extends State<OutLine> {
       color: Colors.blue.withOpacity(0.3),
       child: const Friends(),
     ),
-    Container(
-      alignment: Alignment.center,
-      color: Colors.blue.withOpacity(0.3),
-      child: const Watch(),
-    ),
-    Container(
-      alignment: Alignment.center,
-      color: Colors.blue.withOpacity(0.3),
-      child: const Marketplace(),
-    ),
+    // Container(
+    //   alignment: Alignment.center,
+    //   color: Colors.blue.withOpacity(0.3),
+    //   child: const Watch(),
+    // ),
+    // Container(
+    //   alignment: Alignment.center,
+    //   color: Colors.blue.withOpacity(0.3),
+    //   child: const Marketplace(),
+    // ),
     Container(
       alignment: Alignment.center,
       color: Colors.blue.withOpacity(0.3),
       child: const Notice(),
     ),
-    Container(
-      alignment: Alignment.center,
-      color: Colors.pink.withOpacity(0.3),
-      child: const Menu(),
-    ),
+    // Container(
+    //   alignment: Alignment.center,
+    //   color: Colors.pink.withOpacity(0.3),
+    //   child: const Menu(),
+    // ),
   ];
 
   void _onTap(int index) {
@@ -86,10 +86,10 @@ class OutLineState extends State<OutLine> {
           //   icon: Icon(Icons.storefront),
           //   label: 'Marketplace',
           // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.notifications),
-          //   label: 'お知らせ',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'お知らせ',
+          ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.menu),
           //   label: 'メニュー',
