@@ -18,6 +18,12 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    // デバイスの画面高さを取得
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    // デバイスの画面幅を取得
+    final double deviceWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -129,25 +135,31 @@ class HomeState extends State<Home> {
                     color: Colors.black,
                     splashRadius: 21,
                     onPressed: () {
-                      // ダイアログの表示
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            // title: const Text("タイトル"),
-                            content: const Text("ボタンをタップしました"),
-                            actions: [
-                              TextButton(
-                                child: const Text("Cancel"),
-                                onPressed: () => Navigator.pop(context),
+                      // モーダルダイアログの表示
+                      showModalBottomSheet(
+                        //モーダルの背景の色、透過
+                          backgroundColor: Colors.transparent,
+                          //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              margin: const EdgeInsets.only(top: 100),
+                              // height: 150,
+                              decoration: const BoxDecoration(
+                                //モーダル自体の色
+                                color: Colors.white,
+                                //角丸にする
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
                               ),
-                              TextButton(
-                                child: const Text("OK"),
-                                onPressed: () => Navigator.pop(context),
+                              child: const Center(
+                                child: Text('モーダルダイアログの表示'),
                               ),
-                            ],
-                          );
-                        },
+                            );
+                          }
                       );
                     },
                   ),
@@ -482,7 +494,7 @@ class HomeState extends State<Home> {
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.only(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -522,80 +534,60 @@ class HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              const Row(
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  // TODO:…アイコンタップ時の挙動
-                                  Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: SizedBox(
-                                      width: 30,
-                                      child: Icon(
-                                        Icons.more_horiz,
-                                        size: 30,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                  IconButton(
+                                    icon: const Icon(Icons.more_horiz),
+                                    iconSize: 30,
+                                    splashRadius: 22,
+                                    onPressed: () {
+                                      // モーダルダイアログの表示
+                                      showModalBottomSheet(
+                                        //モーダルの背景の色、透過
+                                        backgroundColor: Colors.transparent,
+                                        //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Container(
+                                            // 画面サイズから表示領域を指定
+                                            // margin: const EdgeInsets.only(top: 700),
+                                            // 画面サイズに関係なく表示領域を指定
+                                            height: deviceHeight * 0.4,
+                                            decoration: const BoxDecoration(
+                                              //モーダル自体の色
+                                              color: Colors.white,
+                                              //角丸にする
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20),
+                                              ),
+                                            ),
+                                            child: const Center(
+                                              child: Text('モーダルダイアログの表示'),
+                                            ),
+                                          );
+                                        }
+                                      );
+                                    },
                                   ),
                                   // TODO:✕アイコンタップ時の挙動
-                                  Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: SizedBox(
-                                      width: 30,
-                                      child: Icon(
-                                        Icons.close,
-                                        size: 30,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                                  IconButton(
+                                    icon: const Icon(Icons.close),
+                                    iconSize: 30,
+                                    splashRadius: 22,
+                                    onPressed: () {
+                                    },
                                   ),
                                 ],
                               ),
-                              /// ユーザー写真
-                              // Icon(
-                              //   Icons.account_circle,
-                              //   size: 40,
-                              //   color: Colors.indigo,
-                              // ),
-                              // /// ユーザー名と投稿日付
-                              // Column(
-                              //   children: [
-                              //     Text('username'),
-                              //     Text('date'),
-                              //   ],
-                              // ),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.end,
-                              //   children: [
-                              //     /// アイコン
-                              //     Padding(
-                              //       padding: EdgeInsets.all(5),
-                              //       child: Icon(
-                              //         Icons.more_horiz,
-                              //         size: 30,
-                              //         color: Colors.black,
-                              //       ),
-                              //     ),
-                              //     Padding(
-                              //       padding: EdgeInsets.all(5),
-                              //       child: Icon(
-                              //         Icons.close,
-                              //         size: 30,
-                              //         color: Colors.black,
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 60,
-                            child: Text('投稿内容テキスト投稿内容テキスト投稿内容テキスト投稿内容テキスト'),
-                          )
+                          padding: EdgeInsets.only(top: 0.0, left: 10.0, bottom: 3.0, right: 10.0),
+                          child: Text('投稿内容テキスト投稿内容テキスト投稿内容テキスト投稿内容テキスト')
                         ),
                         Image.asset('images/temple.jpg'),
                         // Icon(
@@ -657,38 +649,67 @@ class HomeState extends State<Home> {
                       ),
                       child: Column(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(top: 8.0, left: 10.0, right: 10.0),
+                          Padding(
+                            // padding: EdgeInsets.only(top: 8.0, left: 10.0, right: 10.0),
+                            padding: const EdgeInsets.only(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0),
                             child: Row(
                               // 要素を左右に配置
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
                                       '知り合いかも',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   )
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    // TODO: …アイコンタップ時の挙動
-                                    Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: Icon(
-                                        Icons.more_horiz,
-                                        size: 30,
-                                        color: Colors.black,
-                                      ),
+                                    IconButton(
+                                      icon: const Icon(Icons.more_horiz),
+                                      iconSize: 30,
+                                      splashRadius: 22,
+                                      onPressed: () {
+                                        // モーダルダイアログの表示
+                                        showModalBottomSheet(
+                                          //モーダルの背景の色、透過
+                                            backgroundColor: Colors.transparent,
+                                            //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                                            isScrollControlled: true,
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                // 画面サイズから表示領域を指定
+                                                // margin: const EdgeInsets.only(top: 700),
+                                                // 画面サイズに関係なく表示領域を指定
+                                                height: deviceHeight * 0.4,
+                                                decoration: const BoxDecoration(
+                                                  //モーダル自体の色
+                                                  color: Colors.white,
+                                                  //角丸にする
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20),
+                                                    topRight: Radius.circular(20),
+                                                  ),
+                                                ),
+                                                child: const Center(
+                                                  child: Text('モーダルダイアログの表示'),
+                                                ),
+                                              );
+                                            }
+                                        );
+                                      },
                                     ),
-                                    // TODO: ✕アイコンタップ時の挙動
-                                    Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: Icon(
-                                        Icons.close,
-                                        size: 30,
-                                        color: Colors.black,
-                                      ),
+                                    // TODO:✕アイコンタップ時の挙動
+                                    IconButton(
+                                      icon: const Icon(Icons.close),
+                                      iconSize: 30,
+                                      splashRadius: 22,
+                                      onPressed: () {
+                                      },
                                     ),
                                   ],
                                 ),

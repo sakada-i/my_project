@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../Login.dart';
+import 'Recommend/Recommend.dart';
 
 class Friends extends ConsumerWidget {
   const Friends({super.key});
@@ -11,13 +13,13 @@ class Friends extends ConsumerWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+          SliverAppBar(
             backgroundColor: Colors.white,
             // 戻るボタンの可否
             automaticallyImplyLeading: false,
             // 下線の非表示
             elevation: 0.0,
-            title: Text(
+            title: const Text(
               '友達',
               style: TextStyle(
                 fontSize: 30,
@@ -25,6 +27,53 @@ class Friends extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 4.0,
+                    left: 4.0,
+                    bottom: 4.0,
+                    right: 8.0
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.withOpacity(0.3),
+                  ),
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    icon: const Icon(Icons.search),
+                    color: Colors.black,
+                    splashRadius: 21,
+                    onPressed: () {
+                      // ダイアログの表示
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            // title: const Text("タイトル"),
+                            content: const Text("ボタンをタップしました"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: const Text("OK"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+
           ),
           SliverList(
             delegate: SliverChildListDelegate([
@@ -55,25 +104,16 @@ class Friends extends ConsumerWidget {
                                 elevation: 0.0,
                               ),
                               onPressed: () {
-                                // ダイアログの表示
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      // title: const Text("タイトル"),
-                                      content: const Text("ボタンをタップしました"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                        TextButton(
-                                          child: const Text("OK"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  },
+                                // 画面遷移
+                                Navigator.push(
+                                  context,
+                                  // MaterialPageRoute(builder: (context) => const Recommend()),
+                                  PageTransition(
+                                    child: const Recommend(), //画面遷移先
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: const Duration(milliseconds: 200),//アニメーションの時間
+                                    reverseDuration: const Duration(milliseconds: 300),//戻る際のアニメーションの時間
+                                  ),
                                 );
                               },
                               child: const Text('おすすめ'),
@@ -698,22 +738,6 @@ class Friends extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                          // const Padding(
-                          //   padding: EdgeInsets.all(4.0),
-                          //   child: SizedBox(
-                          //     width: double.infinity,
-                          //     height: 100,
-                          //     child: ListTile(
-                          //       // dense: true,
-                          //       leading: CircleAvatar(
-                          //         // backgroundImage: AssetImage('images/くま.jpg'),
-                          //         backgroundColor: Colors.yellow,
-                          //         child: Text('AH'),
-                          //       ),
-                          //       title: Text('ddd'),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
@@ -725,79 +749,6 @@ class Friends extends ConsumerWidget {
           ),
         ],
       ),
-
-      ///
-      // body: CustomScrollView(
-      //   slivers: [
-      //     const SliverAppBar(
-      //       title: Text('スライバーテスト'),
-      //     ),
-      //     SliverList(
-      //       delegate: SliverChildListDelegate([
-      //         Column(
-      //           children:[
-      //             Container(
-      //               alignment: Alignment.center,
-      //               width: double.infinity,
-      //               height: 300,
-      //               color: Colors.red[100],
-      //               child: const Text(
-      //                 'a',
-      //                 style: TextStyle(
-      //                   fontSize: 100,
-      //                   fontWeight: FontWeight.bold
-      //                 ),
-      //               ),
-      //             ),
-      //             Container(
-      //               alignment: Alignment.center,
-      //               width: double.infinity,
-      //               height: 300,
-      //               color: Colors.blue[100],
-      //               child: const Text(
-      //                 'b',
-      //                 style: TextStyle(
-      //                   fontSize: 100,
-      //                   fontWeight: FontWeight.bold
-      //                 ),
-      //               ),
-      //             ),
-      //             Container(
-      //               alignment: Alignment.center,
-      //               width: double.infinity,
-      //               height: 300,
-      //               color: Colors.yellow[100],
-      //               child: const Text(
-      //                 'c',
-      //                 style: TextStyle(
-      //                   fontSize: 100,
-      //                   fontWeight: FontWeight.bold
-      //                 ),
-      //               ),
-      //             ),
-      //             Container(
-      //               alignment: Alignment.center,
-      //               width: double.infinity,
-      //               height: 300,
-      //               color: Colors.green[100],
-      //               child: const Text(
-      //                 'd',
-      //                 style: TextStyle(
-      //                   fontSize: 100,
-      //                   fontWeight: FontWeight.bold
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ]),
-      //       // delegate: SliverChildDelegate([
-      //       //     Text('aaa'),
-      //       // ]),
-      //     ),
-      //   ],
-      // )
-      ///
 
       // appBar: AppBar(
       //   backgroundColor: Colors.white,

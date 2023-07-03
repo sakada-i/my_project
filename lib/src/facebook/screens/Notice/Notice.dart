@@ -8,6 +8,12 @@ class Notice extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    // デバイスの画面高さを取得
+    final double deviceHeight = MediaQuery.of(context).size.height;
+    // デバイスの画面幅を取得
+    final double deviceWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
 
       body: CustomScrollView(
@@ -41,16 +47,45 @@ class Notice extends ConsumerWidget {
                     icon: const Icon(Icons.settings),
                     color: Colors.black,
                     splashRadius: 21,
-                    onPressed: () {},
+                    onPressed: () {
+                      // モーダルダイアログの表示
+                      showModalBottomSheet(
+                        //モーダルの背景の色、透過
+                        backgroundColor: Colors.transparent,
+                        //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            // 画面サイズから表示領域を指定
+                            // margin: const EdgeInsets.only(top: 700),
+                            // 画面サイズに関係なく表示領域を指定
+                            height: deviceHeight * 0.1,
+                            decoration: const BoxDecoration(
+                              //モーダル自体の色
+                              color: Colors.white,
+                              //角丸にする
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Text('モーダルダイアログの表示'),
+                            ),
+                          );
+                        }
+                      );
+                    },
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 4.0,
-                    left: 4.0,
-                    bottom: 4.0,
-                    right: 8.0
+                  top: 4.0,
+                  left: 4.0,
+                  bottom: 4.0,
+                  right: 8.0
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -64,6 +99,26 @@ class Notice extends ConsumerWidget {
                     color: Colors.black,
                     splashRadius: 21,
                     onPressed: () {
+                      // ダイアログの表示
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            // title: const Text("タイトル"),
+                            content: const Text("ボタンをタップしました"),
+                            actions: [
+                              TextButton(
+                                child: const Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                child: const Text("OK"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 ),
@@ -101,123 +156,148 @@ class Notice extends ConsumerWidget {
                       child: Column(
                         children: [
                           // for (int i = 0; i < 3; i++)
-                            GestureDetector(
-                              onTap:() {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      // title: const Text("タイトル"),
-                                      content: const Text("カードをタップしました"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                        TextButton(
-                                          child: const Text("OK"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              child: Card(
-                                // 影の設定
-                                elevation: 0.0,
-                                // マージンの設定
-                                margin: EdgeInsets.zero,
-                                // 角丸をなくす
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                // 背景色
-                                color: Colors.cyan[50],
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
-                                          // padding: const EdgeInsets.all(4.0),
+                          GestureDetector(
+                            onTap:() {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    // title: const Text("タイトル"),
+                                    content: const Text("カードをタップしました"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text("Cancel"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                      TextButton(
+                                        child: const Text("OK"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Card(
+                              // 影の設定
+                              elevation: 0.0,
+                              // マージンの設定
+                              margin: EdgeInsets.zero,
+                              // 角丸をなくす
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              // 背景色
+                              color: Colors.cyan[50],
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
+                                        // padding: const EdgeInsets.all(4.0),
 
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(color: Colors.lightBlueAccent, width: 2),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(3.0),
-                                                  child: CircleAvatar(
-                                                    // backgroundColor: Colors.yellow,
-                                                    backgroundImage: Image.asset('images/ししまい.png').image,
-                                                    radius: 30,
-                                                    // child: Text('AH'),
-                                                  ),
-                                                ),
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(color: Colors.lightBlueAccent, width: 2),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 45.0, top: 40.0),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(3.0),
                                                 child: CircleAvatar(
                                                   // backgroundColor: Colors.yellow,
-                                                  backgroundImage: Image.asset('images/しか.jpg').image,
-                                                  radius: 15,
+                                                  backgroundImage: Image.asset('images/ししまい.png').image,
+                                                  radius: 30,
                                                   // child: Text('AH'),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 45.0, top: 40.0),
+                                              child: CircleAvatar(
+                                                // backgroundColor: Colors.yellow,
+                                                backgroundImage: Image.asset('images/しか.jpg').image,
+                                                radius: 15,
+                                                // child: Text('AH'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
 
+                                      ),
+                                      const Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // お知らせ内容
+                                            Text('〇〇〇'),
+                                            Text('〇〇〇'),
+                                            Text('日付'),
+                                          ],
                                         ),
-                                        const Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              // お知らせ内容
-                                              Text('〇〇〇'),
-                                              Text('〇〇〇'),
-                                              Text('日付'),
-                                            ],
-                                          ),
-                                        ),
-                                        IconButton(
-                                          icon: const Icon(Icons.more_horiz),
-                                          iconSize: 35,
-                                          splashRadius: 27,
-                                          onPressed: () {
-                                            // ダイアログの表示
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  // title: const Text("タイトル"),
-                                                  content: const Text("ボタンをタップしました"),
-                                                  actions: [
-                                                    TextButton(
-                                                      child: const Text("Cancel"),
-                                                      onPressed: () => Navigator.pop(context),
-                                                    ),
-                                                    TextButton(
-                                                      child: const Text("OK"),
-                                                      onPressed: () => Navigator.pop(context),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.more_horiz),
+                                        iconSize: 35,
+                                        splashRadius: 27,
+                                        onPressed: () {
+                                          // モーダルダイアログの表示
+                                          showModalBottomSheet(
+                                            //モーダルの背景の色、透過
+                                            backgroundColor: Colors.transparent,
+                                            //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                                            isScrollControlled: true,
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                height: deviceHeight * 0.6,
+                                                decoration: const BoxDecoration(
+                                                  //モーダル自体の色
+                                                  color: Colors.white,
+                                                  //角丸にする
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20),
+                                                    topRight: Radius.circular(20),
+                                                  ),
+                                                ),
+                                                child: const Center(
+                                                  child: Text('モーダルダイアログの表示'),
+                                                ),
+                                              );
+                                            }
+                                          );
+                                          // ダイアログの表示
+                                          // showDialog(
+                                          //   context: context,
+                                          //   builder: (context) {
+                                          //     return AlertDialog(
+                                          //       // title: const Text("タイトル"),
+                                          //       content: const Text("ボタンをタップしました"),
+                                          //       actions: [
+                                          //         TextButton(
+                                          //           child: const Text("Cancel"),
+                                          //           onPressed: () => Navigator.pop(context),
+                                          //         ),
+                                          //         TextButton(
+                                          //           child: const Text("OK"),
+                                          //           onPressed: () => Navigator.pop(context),
+                                          //         ),
+                                          //       ],
+                                          //     );
+                                          //   },
+                                          // );
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),
@@ -246,113 +326,121 @@ class Notice extends ConsumerWidget {
                       child: Column(
                         children: [
                           // for (int i = 0; i < 30; i++)
-                            GestureDetector(
-                              onTap:() {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      // title: const Text("タイトル"),
-                                      content: const Text("カードをタップしました"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                        TextButton(
-                                          child: const Text("OK"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
+                          GestureDetector(
+                            onTap:() {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    // title: const Text("タイトル"),
+                                    content: const Text("カードをタップしました"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text("Cancel"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                      TextButton(
+                                        child: const Text("OK"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
 
-                              // 過去
-                              child: Card(
-                                // 影の設定
-                                elevation: 0.0,
-                                // マージンの設定
-                                margin: EdgeInsets.zero,
-                                // 角丸をなくす
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                // 背景色
-                                color: Colors.cyan[50],
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
-                                          // padding: const EdgeInsets.all(4.0),
+                            // 過去
+                            child: Card(
+                              // 影の設定
+                              elevation: 0.0,
+                              // マージンの設定
+                              margin: EdgeInsets.zero,
+                              // 角丸をなくす
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              // 背景色
+                              color: Colors.cyan[50],
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
+                                        // padding: const EdgeInsets.all(4.0),
 
-                                          child: Stack(
-                                            children: [
-                                              CircleAvatar(
+                                        child: Stack(
+                                          children: [
+                                            CircleAvatar(
+                                              // backgroundColor: Colors.yellow,
+                                              backgroundImage: Image.asset('images/ペンギン.jpg').image,
+                                              radius: 35,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 45.0, top: 40.0),
+                                              child: CircleAvatar(
                                                 // backgroundColor: Colors.yellow,
-                                                backgroundImage: Image.asset('images/ペンギン.jpg').image,
-                                                radius: 35,
+                                                backgroundImage: Image.asset('images/しか.jpg').image,
+                                                radius: 15,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 45.0, top: 40.0),
-                                                child: CircleAvatar(
-                                                  // backgroundColor: Colors.yellow,
-                                                  backgroundImage: Image.asset('images/しか.jpg').image,
-                                                  radius: 15,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        const Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              // お知らせ内容
-                                              Text('〇〇〇'),
-                                              Text('〇〇〇'),
-                                              Text('日付'),
-                                            ],
-                                          ),
+                                      ),
+                                      const Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // お知らせ内容
+                                            Text('〇〇〇'),
+                                            Text('〇〇〇'),
+                                            Text('日付'),
+                                          ],
                                         ),
-                                        IconButton(
-                                          icon: const Icon(Icons.more_horiz),
-                                          iconSize: 35,
-                                          splashRadius: 27,
-                                          onPressed: () {
-                                            // ダイアログの表示
-                                            showDialog(
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.more_horiz),
+                                        iconSize: 35,
+                                        splashRadius: 27,
+                                        onPressed: () {
+                                          // モーダルダイアログの表示
+                                          showModalBottomSheet(
+                                            //モーダルの背景の色、透過
+                                              backgroundColor: Colors.transparent,
+                                              //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                                              isScrollControlled: true,
                                               context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  // title: const Text("タイトル"),
-                                                  content: const Text("ボタンをタップしました"),
-                                                  actions: [
-                                                    TextButton(
-                                                      child: const Text("Cancel"),
-                                                      onPressed: () => Navigator.pop(context),
+                                              builder: (BuildContext context) {
+                                                return Container(
+                                                  // 画面サイズから表示領域を指定
+                                                  // margin: const EdgeInsets.only(top: 700),
+                                                  // 画面サイズに関係なく表示領域を指定
+                                                  height: deviceHeight * 0.6,
+                                                  decoration: const BoxDecoration(
+                                                    //モーダル自体の色
+                                                    color: Colors.white,
+                                                    //角丸にする
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(20),
+                                                      topRight: Radius.circular(20),
                                                     ),
-                                                    TextButton(
-                                                      child: const Text("OK"),
-                                                      onPressed: () => Navigator.pop(context),
-                                                    ),
-                                                  ],
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text('モーダルダイアログの表示'),
+                                                  ),
                                                 );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                              }
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),
@@ -379,187 +467,129 @@ class Notice extends ConsumerWidget {
                       child: Column(
                         children: [
                           // for (int i = 0; i < 30; i++)
-                            GestureDetector(
-                              onTap:() {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      // title: const Text("タイトル"),
-                                      content: const Text("カードをタップしました"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                        TextButton(
-                                          child: const Text("OK"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              child: Card(
-                                // 影の設定
-                                elevation: 0.0,
-                                // マージンの設定
-                                margin: EdgeInsets.zero,
-                                // 角丸をなくす
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                // 背景色
-                                color: Colors.white,
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
-                                          // padding: const EdgeInsets.all(4.0),
+                          GestureDetector(
+                            onTap:() {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    // title: const Text("タイトル"),
+                                    content: const Text("カードをタップしました"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text("Cancel"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                      TextButton(
+                                        child: const Text("OK"),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Card(
+                              // 影の設定
+                              elevation: 0.0,
+                              // マージンの設定
+                              margin: EdgeInsets.zero,
+                              // 角丸をなくす
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              // 背景色
+                              color: Colors.white,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 4.0, left: 14.0, bottom: 4.0, right: 14.0),
+                                        // padding: const EdgeInsets.all(4.0),
 
-                                          child: Stack(
-                                            children: [
-                                              CircleAvatar(
+                                        child: Stack(
+                                          children: [
+                                            CircleAvatar(
+                                              // backgroundColor: Colors.yellow,
+                                              backgroundImage: Image.asset('images/ぶた.jpg').image,
+                                              radius: 35,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 45.0, top: 40.0),
+                                              child: CircleAvatar(
                                                 // backgroundColor: Colors.yellow,
-                                                backgroundImage: Image.asset('images/ぶた.jpg').image,
-                                                radius: 35,
+                                                backgroundImage: Image.asset('images/くま.jpg').image,
+                                                radius: 15,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 45.0, top: 40.0),
-                                                child: CircleAvatar(
-                                                  // backgroundColor: Colors.yellow,
-                                                  backgroundImage: Image.asset('images/くま.jpg').image,
-                                                  radius: 15,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        const Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              // お知らせ内容
-                                              Text('〇〇〇'),
-                                              Text('〇〇〇'),
-                                              Text('日付'),
-                                            ],
-                                          ),
+                                      ),
+                                      const Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // お知らせ内容
+                                            Text('〇〇〇'),
+                                            Text('〇〇〇'),
+                                            Text('日付'),
+                                          ],
                                         ),
-                                        IconButton(
-                                          icon: const Icon(Icons.more_horiz),
-                                          iconSize: 35,
-                                          splashRadius: 27,
-                                          onPressed: () {
-                                            // ダイアログの表示
-                                            showDialog(
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.more_horiz),
+                                        iconSize: 35,
+                                        splashRadius: 27,
+                                        onPressed: () {
+                                          // モーダルダイアログの表示
+                                          showModalBottomSheet(
+                                            //モーダルの背景の色、透過
+                                              backgroundColor: Colors.transparent,
+                                              //ドラッグ可能にする（高さもハーフサイズからフルサイズになる様子）
+                                              isScrollControlled: true,
                                               context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  // title: const Text("タイトル"),
-                                                  content: const Text("ボタンをタップしました"),
-                                                  actions: [
-                                                    TextButton(
-                                                      child: const Text("Cancel"),
-                                                      onPressed: () => Navigator.pop(context),
+                                              builder: (BuildContext context) {
+                                                return Container(
+                                                  // 画面サイズから表示領域を指定
+                                                  // margin: const EdgeInsets.only(top: 700),
+                                                  // 画面サイズに関係なく表示領域を指定
+                                                  height: deviceHeight * 0.6,
+                                                  decoration: const BoxDecoration(
+                                                    //モーダル自体の色
+                                                    color: Colors.white,
+                                                    //角丸にする
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(20),
+                                                      topRight: Radius.circular(20),
                                                     ),
-                                                    TextButton(
-                                                      child: const Text("OK"),
-                                                      onPressed: () => Navigator.pop(context),
-                                                    ),
-                                                  ],
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text('モーダルダイアログの表示'),
+                                                  ),
                                                 );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                              }
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-
             ]),
           ),
         ],
       ),
-
-
-
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   // 戻るボタンの可否
-      //   automaticallyImplyLeading: false,
-      //   // 下線の非表示
-      //   elevation: 0.0,
-      //   title: const Text(
-      //     'お知らせ',
-      //     style: TextStyle(
-      //       fontSize: 30,
-      //       color: Colors.black,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   actions: <Widget>[
-      //     Padding(
-      //       // padding: const EdgeInsets.all(4.0),
-      //       padding: const EdgeInsets.all(4.0),
-      //       child: Container(
-      //         decoration: BoxDecoration(
-      //           shape: BoxShape.circle,
-      //           color: Colors.grey[200],
-      //         ),
-      //         height: 40,
-      //         width: 40,
-      //         child: IconButton(
-      //           icon: const Icon(Icons.settings),
-      //           color: Colors.black,
-      //           splashRadius: 21,
-      //           onPressed: () {},
-      //         ),
-      //       ),
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.only(
-      //         top: 4.0,
-      //         left: 4.0,
-      //         bottom: 4.0,
-      //         right: 8.0
-      //       ),
-      //       child: Container(
-      //         decoration: BoxDecoration(
-      //           shape: BoxShape.circle,
-      //           color: Colors.grey.withOpacity(0.3),
-      //         ),
-      //         height: 40,
-      //         width: 40,
-      //         child: IconButton(
-      //           icon: const Icon(Icons.search),
-      //           color: Colors.black,
-      //           splashRadius: 21,
-      //           onPressed: () {
-      //           },
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      // body: Container(
-      //   color: Colors.white,
-      //
-      // ),
     );
   }
 }
