@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../Login.dart';
+import 'FriendsList/FriendsList.dart';
 import 'Recommend/Recommend.dart';
 
 class Friends extends ConsumerWidget {
@@ -111,8 +112,10 @@ class Friends extends ConsumerWidget {
                                   PageTransition(
                                     child: const Recommend(), //画面遷移先
                                     type: PageTransitionType.rightToLeft,
-                                    duration: const Duration(milliseconds: 200),//アニメーションの時間
-                                    reverseDuration: const Duration(milliseconds: 300),//戻る際のアニメーションの時間
+                                    //アニメーションの時間
+                                    duration: const Duration(milliseconds: 400),
+                                    //戻る際のアニメーションの時間
+                                    reverseDuration: const Duration(milliseconds: 400),
                                   ),
                                 );
                               },
@@ -130,25 +133,10 @@ class Friends extends ConsumerWidget {
                               ),
                               child: const Text('友達'),
                               onPressed: () {
-                                // ダイアログの表示
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      // title: const Text("タイトル"),
-                                      content: const Text("ボタンをタップしました"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text("Cancel"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                        TextButton(
-                                          child: const Text("OK"),
-                                          onPressed: () => Navigator.pop(context),
-                                        ),
-                                      ],
-                                    );
-                                  },
+                                // 画面遷移
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const FriendsList()),
                                 );
                               },
                             ),
@@ -185,9 +173,30 @@ class Friends extends ConsumerWidget {
                               ),
                               TextButton(
                                 onPressed:() {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                  // 画面遷移
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(builder: (context) => const Login(title: '',)),
+                                  // );
+                                  // ダイアログを表示する
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        // title: const Text("タイトル"),
+                                        content: const Text("カードをタップしました"),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text("Cancel"),
+                                            onPressed: () => Navigator.pop(context),
+                                          ),
+                                          TextButton(
+                                            child: const Text("OK"),
+                                            onPressed: () => Navigator.pop(context),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
                                 child: const Text('すべて見る'),
@@ -204,6 +213,7 @@ class Friends extends ConsumerWidget {
                           for (int i = 0; i < 3; i++)
                             GestureDetector(
                               onTap:() {
+                                // ダイアログを表示する
                                 showDialog(
                                   context: context,
                                   builder: (context) {

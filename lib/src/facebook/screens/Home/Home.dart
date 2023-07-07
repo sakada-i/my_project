@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../Login.dart';
 
 class Home extends StatefulWidget implements PreferredSizeWidget {
   const Home({Key? key}) : super(key: key);
@@ -194,20 +192,33 @@ class HomeState extends State<Home> {
                               )
                           ),
                           /// 投稿テキストフィールド
-                          const Expanded(
-                            child: TextField(
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              enabled: true,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'その気持ち、シェアしよう',
-                                hintStyle: TextStyle(
-                                  color: Colors.black,
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0),
+                              child: TextButton(
+                                onPressed: () {
+                                },
+                                child: const Text(
+                                  'その気持ち、シェアしよう',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
+                            // child: TextField(
+                            //   style: TextStyle(
+                            //     color: Colors.black,
+                            //   ),
+                            //   enabled: true,
+                            //   decoration: InputDecoration(
+                            //     border: InputBorder.none,
+                            //     hintText: 'その気持ち、シェアしよう',
+                            //     hintStyle: TextStyle(
+                            //       color: Colors.black,
+                            //     ),
+                            //   ),
+                            // ),
                           ),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -540,7 +551,7 @@ class HomeState extends State<Home> {
                                   IconButton(
                                     icon: const Icon(Icons.more_horiz),
                                     iconSize: 30,
-                                    splashRadius: 22,
+                                    splashRadius: 27,
                                     onPressed: () {
                                       // モーダルダイアログの表示
                                       showModalBottomSheet(
