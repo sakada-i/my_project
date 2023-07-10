@@ -1,8 +1,8 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_project/src/facebook/screens/SignUp.dart';
+import 'package:my_project/src/facebook/view/SignUp.dart';
 
-import 'Help.dart';
+import 'Help/Help.dart';
 import 'Home/Home.dart';
 import 'OutLine.dart';
 
@@ -138,28 +138,27 @@ class _Login extends State<Login> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const OutLine()),
-                          );
+                        onPressed: () async {
                           // 認証 start
-                          // try {
-                          //   // メール/パスワードでログイン
-                          //   final FirebaseAuth auth = FirebaseAuth.instance;
-                          //   final UserCredential result = await auth.signInWithEmailAndPassword(
-                          //     email: _email,
-                          //     password: _password,
-                          //   );
-                          //   if (result != null) {
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(builder: (context) => const Home()),
-                          //     );
-                          //   }
-                          // } catch(e) {
-                          //   debugPrint(e as String?);
-                          // }
+                          try {
+                            // メール/パスワードでログイン
+                            final FirebaseAuth auth = FirebaseAuth.instance;
+                            final UserCredential result = await auth.signInWithEmailAndPassword(
+                              email: _email,
+                              password: _password,
+                            );
+                            if (result != null) {
+                              debugPrint('ログインに成功しました。');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Home()),
+                              );
+                            }
+
+                          } catch(e) {
+                            debugPrint(e.toString());
+                            debugPrint('ログインに失敗しました。');
+                          }
                           // 認証 end
                         },
                         child: const Text('アカウント登録'),
